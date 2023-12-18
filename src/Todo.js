@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import "./App.css";
 import { collection, addDoc, getDocs } from "@firebase/firestore";
 import { db } from "./config/firebase";
@@ -22,8 +22,8 @@ const Todo = () => {
   };
   const [todos, setTodos] = useState([]);
 
-  const fetchPost = async () => {
-    await getDocs(collection(db, "tasks")).then((querySnapshot) => {
+  useCallback(() => {
+    getDocs(collection(db, "tasks")).then((querySnapshot) => {
       const newData = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
@@ -31,10 +31,7 @@ const Todo = () => {
       setTodos(newData);
       console.log(todos, newData);
     });
-  };
-  useEffect(() => {
-    fetchPost();
-  }, []);
+  }, [todos]);
 
   return (
     <form className="form" onSubmit={addTodo}>
@@ -49,7 +46,6 @@ const Todo = () => {
         Add Task
       </button>
       <div>
-        {" "}
         {todos?.map((todo, i) => (
           <p key={i}>{todo.value}</p>
         ))}
