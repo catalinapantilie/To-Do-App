@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+/* Log in  */
+.form-2 {
+  max-width: 410px;
+  width: 100%;
+
+  padding: 30px;
+  border-radius: 6px;
+  background: white;
+  box-sizing: border-box;
+}
+.form-2 p {
+  text-align: center;
+  color: green;
+  font-weight: 500;
+  font-size: x-large;
+  margin-bottom: 5px;
+}
+.form-2 .field {
+  height: 100%;
+  width: 100%;
+}
+
+.field input {
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  border: 1px solid gainsboro;
+  margin-bottom: 9px;
+}
+
+.button-2 {
+  padding: 8px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+  background-color: #13c080;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 9px #999;
+}
+
+.button-2:hover {
+  background-color: #3e8e41;
+}
+
+.button-2:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.form-login {
+  margin: 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.form-login .button-2 {
+  margin-left: 12px;
+}

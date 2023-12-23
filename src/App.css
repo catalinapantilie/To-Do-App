@@ -28,14 +28,14 @@ h1 {
   font-size: 1.75rem;
 }
 
-.form {
+.form-todo {
   width: 100%;
 }
 
-.form-input {
+.todo-input {
   outline: none;
-  background: none;
-  border: 1px solid #8758ff;
+  background: whitesmoke;
+  border: 1px solid #dcdae1;
   padding: 0.5rem 1rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
@@ -48,15 +48,16 @@ h1 {
 }
 
 .form-btn {
-  background: #8758ff;
-  color: #fff;
+  background: #e0dee5;
+  color: black;
   border: none;
   padding: 0.55rem;
   cursor: pointer;
+  margin-left: 1rem;
 }
 
 .todo {
-  display: flex;
+  display: flexbox;
   justify-content: space-between;
   align-items: center;
   background: #8758ff;
@@ -92,61 +93,4 @@ h1 {
 .edit-icon,
 .delete-icon {
   cursor: pointer;
-}
-
-/* Log in  */
-.form {
-  max-width: 430px;
-  width: 100%;
-  padding: 30px;
-  border-radius: 6px;
-  background: white;
-}
-form .field {
-  height: 50px;
-  width: 100%;
-  margin-top: 20px;
-}
-
-.field input {
-  height: 100%;
-  width: 100%;
-  border: none;
-  font-size: 16px;
-  font-weight: 400;
-  border-radius: 6px;
-}
-
-.button {
-  height: 100%;
-  width: 100%;
-  font-size: 16px;
-  font-weight: 400;
-  border-radius: 6px;
-  margin-top: 20px;
-}
-
-.field input {
-  padding: 0 15px;
-  border: 1px solid gainsboro;
-}
-
-.form-link {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.form-link span,
-.form-link p {
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.form p {
-  color: blue;
-  text-decoration: none;
-}
-
-.form p:hover {
-  text-decoration: underline;
 }

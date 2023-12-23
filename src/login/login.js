@@ -5,7 +5,7 @@ import {
 } from "firebase/auth";
 import { useState } from "react";
 import { Cookies } from "react-cookie";
-
+import "./login.css";
 const cookies = new Cookies();
 
 export function Auth(props) {
@@ -43,24 +43,26 @@ export function Auth(props) {
     console.log(auth);
   };
   return (
-    <div>
+    <div className="form-2">
       <p>Log In</p>
-      <div className="field input">
+      <div className="field">
         <input
           placeholder="Email..."
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           placeholder="Password..."
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <button className="button-2" onClick={signIn}>
+          New user
+        </button>
       </div>
-      <button className="button" onClick={signIn}>
-        New user
-      </button>
-      <div className="form-link">
+
+      <div className="form-login">
         Already have an account
-        <button className="button" onClick={logIn}>
+        <button className="button-2" onClick={logIn}>
           Log In
         </button>
       </div>

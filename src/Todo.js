@@ -15,6 +15,7 @@ const Todo = () => {
         value: todo,
       });
       console.log("Document written with ID: ", docRef.id);
+      getTodosList();
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -25,8 +26,8 @@ const Todo = () => {
 
   const getTodosList = async () => {
     try {
-      await getDocs(todosCollectionRef).then((data) => {
-        const filteredData = data.docs.map((doc) => ({
+      await getDocs(todosCollectionRef).then((querySnapshot) => {
+        const filteredData = querySnapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }));
@@ -34,27 +35,28 @@ const Todo = () => {
         console.log(filteredData);
       });
     } catch (e) {
-      console.error("Error list documents: ", e);
+      console.error("Error document: ", e);
     }
   };
   useEffect(() => {
-    getTodosList(); // eslint-disable-next-line
+    getTodosList();
   }, []);
+
   return (
-    <form className="form" onSubmit={addTodo}>
+    <form className="form-todo" onSubmit={addTodo}>
       <input
-        className="form-input"
+        className="todo-input"
         value={todo}
         type="text"
         placeholder="What is the task today"
         onChange={(e) => setTodo(e.target.value)}
       ></input>
-      <button type="submit" className="form-btn">
+      <button className="form-btn" type="submit">
         Add Task
       </button>
-      <div>
-        {todos?.map((todo, i) => (
-          <p key={i}>{todo.value}</p>
+      <div className="todo">
+        {todos?.map((todo) => (
+          <p key={todo}>{todo.value}</p>
         ))}
       </div>
     </form>
