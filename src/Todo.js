@@ -1,10 +1,11 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { collection, addDoc, getDocs } from "@firebase/firestore";
 import { db } from "./config/firebase";
 
 const Todo = () => {
   const [todo, setTodo] = useState("");
+  const [todos, setTodos] = useState([]);
 
   const addTodo = async (e) => {
     e.preventDefault();
@@ -20,19 +21,25 @@ const Todo = () => {
 
     setTodo("");
   };
-  const [todos, setTodos] = useState([]);
+  const todosCollectionRef = collection(db, "tasks");
 
-  useCallback(() => {
-    getDocs(collection(db, "tasks")).then((querySnapshot) => {
-      const newData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setTodos(newData);
-      console.log(todos, newData);
-    });
-  }, [todos]);
-
+  const getTodosList = async () => {
+    try {
+      await getDocs(todosCollectionRef).then((data) => {
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setTodos(filteredData);
+        console.log(filteredData);
+      });
+    } catch (e) {
+      console.error("Error list documents: ", e);
+    }
+  };
+  useEffect(() => {
+    getTodosList(); // eslint-disable-next-line
+  }, []);
   return (
     <form className="form" onSubmit={addTodo}>
       <input
