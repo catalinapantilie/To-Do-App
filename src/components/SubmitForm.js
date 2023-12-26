@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react";
-import "./App.css";
+import { useState } from "react";
 import { collection, addDoc, getDocs } from "@firebase/firestore";
-import { db } from "./config/firebase";
+import { db } from "../config/firebase";
 
-const Todo = () => {
+export default function AddTodo({ setTodos }) {
   const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
 
   const addTodo = async (e) => {
     e.preventDefault();
@@ -14,17 +12,18 @@ const Todo = () => {
       const docRef = await addDoc(collection(db, "tasks"), {
         value: todo,
       });
-      console.log("Document written with ID: ", docRef.id);
       getTodosList();
+      console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
 
     setTodo("");
   };
+
   const todosCollectionRef = collection(db, "tasks");
 
-  const getTodosList = async () => {
+  async function getTodosList() {
     try {
       await getDocs(todosCollectionRef).then((querySnapshot) => {
         const filteredData = querySnapshot.docs.map((doc) => ({
@@ -37,10 +36,7 @@ const Todo = () => {
     } catch (e) {
       console.error("Error document: ", e);
     }
-  };
-  useEffect(() => {
-    getTodosList();
-  }, []);
+  }
 
   return (
     <form className="form-todo" onSubmit={addTodo}>
@@ -54,12 +50,6 @@ const Todo = () => {
       <button className="form-btn" type="submit">
         Add Task
       </button>
-      <div className="todo">
-        {todos?.map((todo) => (
-          <p key={todo}>{todo.value}</p>
-        ))}
-      </div>
     </form>
   );
-};
-export default Todo;
+}

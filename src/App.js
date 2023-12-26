@@ -1,10 +1,10 @@
 import "./App.css";
-import Todo from "./Todo";
 import { Auth } from "./login/login";
 import { auth } from "./config/firebase";
 import { signOut } from "firebase/auth";
 import { Cookies } from "react-cookie";
 import { useState } from "react";
+import ToDoList from "./components/ToDoList";
 
 const cookies = new Cookies();
 
@@ -26,7 +26,7 @@ function App() {
   }
   return (
     <div className="App">
-      <Todo />
+      <ToDoList />
       <button className="button" onClick={signUserOut}>
         Sign Out
       </button>

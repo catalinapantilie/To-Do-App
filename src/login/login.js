@@ -6,6 +6,7 @@ import {
 import { useState } from "react";
 import { Cookies } from "react-cookie";
 import "./login.css";
+
 const cookies = new Cookies();
 
 export function Auth(props) {
