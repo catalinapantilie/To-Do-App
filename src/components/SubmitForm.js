@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { collection, addDoc, getDocs } from "@firebase/firestore";
-import { db } from "../config/firebase";
+import { db, auth } from "../config/firebase";
 
 export default function AddTodo({ setTodos }) {
   const [todo, setTodo] = useState("");
@@ -11,6 +11,9 @@ export default function AddTodo({ setTodos }) {
     try {
       const docRef = await addDoc(collection(db, "tasks"), {
         value: todo,
+        isEditing: false,
+        completed: false,
+        userId: auth?.currentUser?.uid,
       });
       getTodosList();
       console.log("Document written with ID: ", docRef.id);
