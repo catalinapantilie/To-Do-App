@@ -26,6 +26,7 @@ export function Auth(props) {
       cookies.set("auth-token", result.user.refreshToken);
       setIsAuth(true);
     } catch (err) {
+      alert("This user already exist");
       console.log(err);
     }
     console.log(auth);
@@ -39,6 +40,7 @@ export function Auth(props) {
       cookies.set("auth-token", result.user.refreshToken);
       setIsAuth(true);
     } catch (err) {
+      alert("Password or e-mail are wrong");
       console.log(err);
     }
     console.log(auth);

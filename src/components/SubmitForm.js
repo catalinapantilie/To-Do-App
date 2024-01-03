@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { collection, addDoc, getDocs } from "@firebase/firestore";
+import { collection, addDoc, getDocs, query, where } from "@firebase/firestore";
 import { db, auth } from "../config/firebase";
 
 export default function AddTodo({ setTodos }) {
@@ -24,9 +24,14 @@ export default function AddTodo({ setTodos }) {
     setTodo("");
   };
 
-  const todosCollectionRef = collection(db, "tasks");
-
   async function getTodosList() {
+    const userId = auth?.currentUser?.uid;
+    console.log(userId);
+
+    const todosCollectionRef = query(
+      collection(db, "tasks"),
+      where("userId", "==", userId)
+    );
     try {
       await getDocs(todosCollectionRef).then((querySnapshot) => {
         const filteredData = querySnapshot.docs.map((doc) => ({
@@ -50,6 +55,7 @@ export default function AddTodo({ setTodos }) {
         placeholder="What is the task today"
         onChange={(e) => setTodo(e.target.value)}
       ></input>
+
       <button className="form-btn" type="submit">
         Add Task
       </button>

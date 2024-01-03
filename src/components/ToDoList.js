@@ -7,16 +7,22 @@ import {
   deleteDoc,
   doc,
   updateDoc,
+  where,
+  query,
 } from "firebase/firestore";
-import { db } from "../config/firebase";
+import { db, auth } from "../config/firebase";
 
 export default function ToDoList() {
   const [todos, setTodos] = useState([]);
   const [newToDo, setNewToDo] = useState("");
 
-  const todosCollectionRef = collection(db, "tasks");
-
   async function getTodosList() {
+    const userId = auth?.currentUser?.uid;
+
+    const todosCollectionRef = query(
+      collection(db, "tasks"),
+      where("userId", "==", userId)
+    );
     try {
       await getDocs(todosCollectionRef).then((querySnapshot) => {
         const filteredData = querySnapshot.docs.map((doc) => ({
@@ -24,6 +30,7 @@ export default function ToDoList() {
           id: doc.id,
         }));
         setTodos(filteredData);
+
         console.log(filteredData);
       });
     } catch (e) {
@@ -68,12 +75,12 @@ export default function ToDoList() {
     <div className="todoWrapper">
       <h1>To Do List</h1>
       <AddTodo setTodos={getTodosList} />
-      {todos.map((todo) =>
+      {todos.map((todo, i) =>
         todo.isEditing ? (
           <div>
             <input
-              key={todo.id}
-              className="form-input"
+              className="todo-input"
+              key={i}
               value={newToDo}
               type="text"
               placeholder="Update task"

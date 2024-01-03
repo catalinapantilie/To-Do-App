@@ -10,6 +10,7 @@ export default function Task({ todo, deleteToDo, editToDo, toggleComplete }) {
       >
         {todo.value}
       </p>
+      <p> {todo.name}</p>
       <div>
         <FontAwesomeIcon
           icon={faPenToSquare}

@@ -27,7 +27,7 @@ function App() {
   return (
     <div className="App">
       <ToDoList />
-      <button className="button" onClick={signUserOut}>
+      <button className="form-btn" onClick={signUserOut}>
         Sign Out
       </button>
     </div>
