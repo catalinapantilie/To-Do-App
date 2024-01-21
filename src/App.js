@@ -27,9 +27,12 @@ function App() {
   return (
     <div className="App">
       <ToDoList />
-      <button className="form-btn" onClick={signUserOut}>
-        Sign Out
-      </button>
+
+      <div>
+        <button className="form-btn out" onClick={signUserOut}>
+          Sign Out
+        </button>
+      </div>
     </div>
   );
 }

@@ -16,9 +16,9 @@ export default function ToDoList() {
   const [todos, setTodos] = useState([]);
   const [newToDo, setNewToDo] = useState("");
 
-  async function getTodosList() {
-    const userId = auth?.currentUser?.uid;
+  const userId = auth?.currentUser?.uid;
 
+  async function getTodosList() {
     const todosCollectionRef = query(
       collection(db, "tasks"),
       where("userId", "==", userId)
